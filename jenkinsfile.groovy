@@ -24,13 +24,14 @@ node {
     def aceWorkspace = jenkinsProjectFacadeService.getProjectWorkSpace(projectConfigSelected);
 
     ws(aceWorkspace) {
+
         stage('git checkout') {
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: projectConfigSelected.gitCredentialsId, url: projectConfigSelected.gitUrl]]])
         }
 
         stage('mvn clean package') {
             def mvn_cmd = '/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/maven3.6.3/bin/mvn';
-            def pom_path = jenkinsProjectFacadeService.getProjectPomFileAbsolutePath(projectConfigSelected);
+            def pom_path = jenkinsProjectFacadeService.getProjectPomFileAbsolutePath(aceWorkspace, projectConfigSelected);
             sh "${mvn_cmd} -f ${pom_path} clean package -e -U -Dmaven.test.skip=true";
         }
     }

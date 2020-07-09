@@ -34,10 +34,11 @@ class JenkinsProjectFacadeService {
     }
     /**
      * 获取项目jenkins的pom.xml文件的绝对位置
+     * @param workspace jenkins 工作空间
      * @param project
      * @return
      */
-    def getProjectPomFileAbsolutePath(Project project) {
-        return "${this.getProjectWorkSpace(project)}${project.pomFileRelativePath}";
+    def getProjectPomFileAbsolutePath(String workspace, Project project) {
+        return "${workspace}${project.pomFileRelativePath}";
     }
 }
