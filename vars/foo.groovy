@@ -16,11 +16,15 @@ def allProjectConfigs = [
 
 // 查对对应的项目配置
 def findProjectConfigSelected(allProjectConfigs, projectIdSelected) {
-        for (int i = 0; i < allProjectConfigs.size(); i++) {
-                def curProjectConfig = allProjectConfigs.get(i);
-                if (curProjectConfig.id.equalsIgnoreCase(projectIdSelected)) {
-                        return curProjectConfig;
-                }
+    for (int i = 0; i < allProjectConfigs.size(); i++) {
+        def curProjectConfig = allProjectConfigs.get(i);
+        if (curProjectConfig.id.equalsIgnoreCase(projectIdSelected)) {
+            return curProjectConfig;
         }
-        return null;
+    }
+    return null;
 };
+
+def test() {
+    echo "1111";
+}
