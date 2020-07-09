@@ -12,25 +12,25 @@ class Project {
     /**
      *  项目的唯一标识
      */
-    private String id;
+    String id;
     /**
      * 项目目录名称
      */
-    private String projectDirName;
+    String projectDirName;
     /**
      * git 项目url
      *
      */
-    private String gitUrl;
+    String gitUrl;
 
     /**
      * git 在jenkins中的凭证名称
      */
-    private String gitCredentialsId;
+    String gitCredentialsId;
     /**
      * pom文件相对路径
      */
-    private String pomFileRelativePath;
+    String pomFileRelativePath;
 //    @NonCPS
 //    String getId() {
 //        return id
