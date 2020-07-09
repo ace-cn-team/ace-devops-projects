@@ -31,44 +31,44 @@ class Project {
      * pom文件相对路径
      */
     private String pomFileRelativePath;
-    @NonCPS
-    String getId() {
-        return id
-    }
-    @NonCPS
-    void setId(String id) {
-        this.id = id
-    }
-
-    String getProjectDirName() {
-        return projectDirName
-    }
-
-    void setProjectDirName(String projectDirName) {
-        this.projectDirName = projectDirName
-    }
-
-    String getGitUrl() {
-        return gitUrl
-    }
-
-    void setGitUrl(String gitUrl) {
-        this.gitUrl = gitUrl
-    }
-
-    String getGitCredentialsId() {
-        return gitCredentialsId
-    }
-
-    void setGitCredentialsId(String gitCredentialsId) {
-        this.gitCredentialsId = gitCredentialsId
-    }
-
-    String getPomFileRelativePath() {
-        return pomFileRelativePath
-    }
-
-    void setPomFileRelativePath(String pomFileRelativePath) {
-        this.pomFileRelativePath = pomFileRelativePath
-    }
+//    @NonCPS
+//    String getId() {
+//        return id
+//    }
+//    @NonCPS
+//    void setId(String id) {
+//        this.id = id
+//    }
+//    @NonCPS
+//    String getProjectDirName() {
+//        return projectDirName
+//    }
+//    @NonCPS
+//    void setProjectDirName(String projectDirName) {
+//        this.projectDirName = projectDirName
+//    }
+//    @NonCPS
+//    String getGitUrl() {
+//        return gitUrl
+//    }
+//    @NonCPS
+//    void setGitUrl(String gitUrl) {
+//        this.gitUrl = gitUrl
+//    }
+//    @NonCPS
+//    String getGitCredentialsId() {
+//        return gitCredentialsId
+//    }
+//    @NonCPS
+//    void setGitCredentialsId(String gitCredentialsId) {
+//        this.gitCredentialsId = gitCredentialsId
+//    }
+//    @NonCPS
+//    String getPomFileRelativePath() {
+//        return pomFileRelativePath
+//    }
+//    @NonCPS
+//    void setPomFileRelativePath(String pomFileRelativePath) {
+//        this.pomFileRelativePath = pomFileRelativePath
+//    }
 }
