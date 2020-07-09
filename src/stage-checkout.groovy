@@ -1,0 +1,6 @@
+node {
+
+    echo WORKSPACE;
+
+
+}
