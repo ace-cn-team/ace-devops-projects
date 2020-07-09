@@ -1,5 +1,6 @@
-@Library("ace-devops-utils@master");
-
+@Library("ace-devops-utils@master")
+def work;
 node {
-    foo.test();
+    aceProjectConfig.test();
+    echo aceProjectConfig.getAllProjects();
 }
