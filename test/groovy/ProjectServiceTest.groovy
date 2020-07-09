@@ -1,6 +1,7 @@
 import ace.devops.module.project.ProjectDefaultContext
 import ace.devops.module.project.service.JenkinsProjectFacadeService
 import ace.devops.module.project.service.ProjectService
+import com.cloudbees.groovy.cps.NonCPS
 import groovy.json.JsonOutput
 import org.junit.Test
 
@@ -9,6 +10,7 @@ import org.junit.Test
  * @create 2020/7/9 15:56
  * @description
  */
+
 class ProjectServiceTest {
 
     @Test

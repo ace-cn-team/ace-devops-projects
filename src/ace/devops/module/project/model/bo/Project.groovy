@@ -1,10 +1,13 @@
 package ace.devops.module.project.model.bo
 
+import com.cloudbees.groovy.cps.NonCPS
+
 /**
  * @author Caspar* @contract 279397942@qq.com
  * @create 2020/7/9 15:17
  * @description
  */
+
 class Project {
     /**
      *  项目的唯一标识
@@ -28,11 +31,11 @@ class Project {
      * pom文件相对路径
      */
     private String pomFileRelativePath;
-
+    @NonCPS
     String getId() {
         return id
     }
-
+    @NonCPS
     void setId(String id) {
         this.id = id
     }
