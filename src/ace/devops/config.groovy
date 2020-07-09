@@ -1,3 +1,4 @@
+package ace.devops
 // 所有项目配置
 def allProjectConfigs = [
         [
@@ -25,4 +26,5 @@ def findProjectConfigSelected(allProjectConfigs, projectIdSelected) {
         return null;
 };
 
+def k=1;
 return this;

@@ -1,9 +1,11 @@
-library identifier: 'ace-devops-utils', retriever: modernSCM(
+library identifier: 'ace-devops-utils@master', retriever: modernSCM(
         [$class       : 'GitSCMSource',
          remote       : 'https://github.com/ace-cn-team/ace-devops-projects.git',
          credentialsId: 'ace-jenkins'
         ]
 )
+import ace.devops.config;
 node {
-    echo config.allProjectConfigs
+    config a = new config();
+    echo a.allProjectConfigs;
 }
