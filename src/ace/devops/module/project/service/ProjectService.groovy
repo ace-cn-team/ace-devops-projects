@@ -9,6 +9,7 @@ import ace.devops.module.project.model.bo.Project
  */
 class ProjectService {
     private List<Project> projects;
+
     /**
      * 查对对应的项目配置
      */
@@ -21,6 +22,7 @@ class ProjectService {
         }
         return null;
     };
+
     /**
      * 获取全部项目配置
      * @return

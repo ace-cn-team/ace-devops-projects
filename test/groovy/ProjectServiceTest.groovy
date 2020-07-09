@@ -1,7 +1,6 @@
 import ace.devops.module.project.ProjectDefaultContext
 import ace.devops.module.project.service.JenkinsProjectFacadeService
 import ace.devops.module.project.service.ProjectService
-import com.cloudbees.groovy.cps.NonCPS
 import groovy.json.JsonOutput
 import org.junit.Test
 
@@ -20,5 +19,8 @@ class ProjectServiceTest {
         println(JsonOutput.toJson(projectService.findAll()));
         JenkinsProjectFacadeService jenkinsProjectFacadeService = projectDefaultContext.jenkinsProjectFacadeService;
         println(jenkinsProjectFacadeService.getChoiceFromProjects());
+        def project = projectService.findAll().stream().findFirst().get();
+        println("jenkinsProjectFacadeService.getProjectWorkSpace:${jenkinsProjectFacadeService.getProjectWorkSpace(project)}");
+        println("jenkinsProjectFacadeService.getProjectPomFileAbsolutePath:${jenkinsProjectFacadeService.getProjectPomFileAbsolutePath(project)}");
     }
 }

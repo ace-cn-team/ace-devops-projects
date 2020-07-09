@@ -9,8 +9,9 @@ import ace.devops.module.project.model.bo.Project
  */
 class JenkinsProjectFacadeService {
     private ProjectService projectService;
+    private final static String WORK_SPACE_PREFIX = "/var/jenkins_home/ace/tmp";
     /**
-     * 查对对应的项目配置
+     * 获取jenkins 项目ID输入参数的所有选择
      */
     def getChoiceFromProjects() {
         def allProjectConfigs = projectService.findAll();
@@ -23,5 +24,20 @@ class JenkinsProjectFacadeService {
         return sb.toString();
     };
 
-
+    /**
+     * 获取项目jenkins的工作空间
+     * @param project
+     * @return
+     */
+    def getProjectWorkSpace(Project project) {
+        return "${WORK_SPACE_PREFIX}/${project.projectDirName}";
+    }
+    /**
+     * 获取项目jenkins的pom.xml文件的绝对位置
+     * @param project
+     * @return
+     */
+    def getProjectPomFileAbsolutePath(Project project) {
+        return "${this.getProjectWorkSpace(project)}${project.pomFileRelativePath}";
+    }
 }
