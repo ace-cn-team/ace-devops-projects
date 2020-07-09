@@ -1,6 +1,16 @@
-import ace.devops.module.project.model.bo.Project
+package ace.devops.module.project
 
-def getAllProjects() {
+import ace.devops.module.project.model.bo.Project
+import ace.devops.module.project.service.JenkinsProjectFacadeService
+import ace.devops.module.project.service.ProjectService
+
+/**
+ * @author Caspar* @contract 279397942@qq.com
+ * @create 2020/7/9 16:15
+ * @description
+ */
+class ProjectDefaultContext {
+
     List<Project> projects = Arrays.asList(
             new Project(
                     // 项目的唯一标识
@@ -14,10 +24,12 @@ def getAllProjects() {
                     // 相对路径
                     pomFileRelativePath: "/ace-account-base-api-web/pom.xml",)
     );
-    return projects;
-}
+    ProjectService projectService;
 
+    JenkinsProjectFacadeService jenkinsProjectFacadeService;
 
-def test() {
-    echo "1111";
+    ProjectDefaultContext() {
+        projectService = new ProjectService(projects: projects);
+        jenkinsProjectFacadeService = new JenkinsProjectFacadeService(projectService: projectService);
+    }
 }

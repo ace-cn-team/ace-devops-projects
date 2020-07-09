@@ -9,10 +9,10 @@ import ace.devops.module.project.model.bo.Project
  */
 class ProjectService {
     private List<Project> projects;
-
-
-    // 查对对应的项目配置
-    findProjectConfigSelected(projectId) {
+    /**
+     * 查对对应的项目配置
+     */
+    def findProjectConfigSelected(projectId) {
         for (int i = 0; i < this.projects.size(); i++) {
             def curProjectConfig = this.projects.get(i);
             if (curProjectConfig.id.equalsIgnoreCase(projectId)) {
@@ -21,4 +21,11 @@ class ProjectService {
         }
         return null;
     };
+    /**
+     * 获取全部项目配置
+     * @return
+     */
+    def findAll() {
+        return projects;
+    }
 }
