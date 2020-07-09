@@ -31,7 +31,7 @@ node {
 
         stage('mvn clean package') {
             def mvn_cmd = '/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/maven3.6.3/bin/mvn';
-            def pom_path = jenkinsProjectFacadeService.getProjectPomFileAbsolutePath(aceWorkspace, projectConfigSelected);
+            def pom_path = jenkinsProjectFacadeService.getProjectPomFileAbsolutePath(WORKSPACE, projectConfigSelected);
             sh "${mvn_cmd} -f ${pom_path} clean package -e -U -Dmaven.test.skip=true";
         }
     }
