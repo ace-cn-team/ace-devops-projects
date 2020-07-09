@@ -1,4 +1,4 @@
-library 'ace-devops-utils@master'
+@Library("ace-devops-utils@master")
 import ace.devops.config;
 node {
     config a = new config();
