@@ -2,5 +2,6 @@
 import ace.devops.config;
 node {
     config a = new config();
-    echo a.allProjectConfigs;
+    a.k=2;
+    echo a.k;
 }

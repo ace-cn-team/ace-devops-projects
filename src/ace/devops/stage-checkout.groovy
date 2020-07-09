@@ -1,8 +1,8 @@
-package ace.devops
-
-node {
-
-    echo WORKSPACE;
-
-
-}
+//package ace.devops
+//
+//node {
+//
+//    echo WORKSPACE;
+//
+//
+//}
