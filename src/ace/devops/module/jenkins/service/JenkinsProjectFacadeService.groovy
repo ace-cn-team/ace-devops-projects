@@ -1,6 +1,7 @@
-package ace.devops.module.project.service
+package ace.devops.module.jenkins.service
 
 import ace.devops.module.project.model.bo.Project
+import ace.devops.module.project.service.ProjectService
 
 /**
  * @author Caspar* @contract 279397942@qq.com
@@ -40,5 +41,17 @@ class JenkinsProjectFacadeService {
      */
     def getProjectPomFileAbsolutePath(String workspace, Project project) {
         return "${workspace}${project.pomFileRelativePath}";
+    }
+/**
+ *
+ * @param projectId
+ */
+    def findProjectIsNullThrows(String projectId) {
+        def projectSelected = projectService.findProjectConfigSelected(projectId);
+
+        if (projectSelected == null) {
+            throw new RuntimeException(String.format("%s没有对应配置", projectIdSelected));
+        }
+        return projectSelected;
     }
 }

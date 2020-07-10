@@ -1,5 +1,7 @@
-import ace.devops.module.project.ProjectDefaultContext
-import ace.devops.module.project.service.JenkinsProjectFacadeService
+import ace.devops.DefaultContext
+import ace.devops.module.jenkins.enums.EnvironmentEnum
+import ace.devops.module.jenkins.service.JenkinsEnvService
+import ace.devops.module.jenkins.service.JenkinsProjectFacadeService
 import ace.devops.module.project.service.ProjectService
 import groovy.json.JsonOutput
 import org.junit.Test
@@ -14,13 +16,16 @@ class ProjectServiceTest {
 
     @Test
     void initProjectService() {
-        ProjectDefaultContext projectDefaultContext = new ProjectDefaultContext();
-        ProjectService projectService = projectDefaultContext.projectService;
+        DefaultContext defaultContext = new DefaultContext();
+        JenkinsEnvService jenkinsEnvService = defaultContext.jenkinsEnvService;
+        ProjectService projectService = defaultContext.projectService;
         println(JsonOutput.toJson(projectService.findAll()));
-        JenkinsProjectFacadeService jenkinsProjectFacadeService = projectDefaultContext.jenkinsProjectFacadeService;
+        JenkinsProjectFacadeService jenkinsProjectFacadeService = defaultContext.jenkinsProjectFacadeService;
         println(jenkinsProjectFacadeService.getChoiceFromProjects());
         def project = projectService.findAll().stream().findFirst().get();
         println("jenkinsProjectFacadeService.getProjectWorkSpace:${jenkinsProjectFacadeService.getProjectWorkSpace(project)}");
-        println("jenkinsProjectFacadeService.getProjectPomFileAbsolutePath:${jenkinsProjectFacadeService.getProjectPomFileAbsolutePath(project)}");
+        println("jenkinsProjectFacadeService.getProjectPomFileAbsolutePath:${jenkinsProjectFacadeService.getProjectPomFileAbsolutePath("", project)}");
+
+        println("jenkinsProjectFacadeService.getProjectPomFileAbsolutePath:${jenkinsEnvService.getChoices()} ");
     }
 }

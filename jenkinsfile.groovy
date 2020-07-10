@@ -1,25 +1,24 @@
 @Library("ace-devops-utils@master")
-import ace.devops.module.project.ProjectDefaultContext
-import ace.devops.module.project.service.JenkinsProjectFacadeService
-import ace.devops.module.project.service.ProjectService
-import groovy.json.JsonOutput
+import ace.devops.DefaultContext;
+import ace.devops.module.project.service.ProjectService;
+import ace.devops.module.jenkins.service.JenkinsProjectFacadeService;
+import groovy.json.JsonOutput;
 
 node {
-    ProjectDefaultContext projectDefaultContext = new ProjectDefaultContext();
-    ProjectService projectService = projectDefaultContext.projectService;
-    JenkinsProjectFacadeService jenkinsProjectFacadeService = projectDefaultContext.jenkinsProjectFacadeService;
+    // 初始化相关工具类
+    DefaultContext defaultContext = new DefaultContext();
+    ProjectService projectService = defaultContext.projectService;
+    JenkinsProjectFacadeService jenkinsProjectFacadeService = defaultContext.jenkinsProjectFacadeService;
 
+    // 输入参数空白的时间，创建输入参数
     properties([
             parameters([
                     choice(choices: jenkinsProjectFacadeService.getChoiceFromProjects(), description: '选择项目', name: 'projectIdSelected'),
+                    choice(choices: [[name:"k",description: "k-description"],[name:"a",description: "a-description"]], description: '选择项目', name: 'projectIdSelected'),
             ])
-    ])
+    ]);
 
-    def projectConfigSelected = projectService.findProjectConfigSelected(projectIdSelected);
-
-    if (projectConfigSelected == null) {
-        throw new RuntimeException(String.format("%s没有对应配置", projectIdSelected));
-    }
+    def projectConfigSelected = jenkinsProjectFacadeService.findProjectIsNullThrows(projectIdSelected)
 
     def aceWorkspace = jenkinsProjectFacadeService.getProjectWorkSpace(projectConfigSelected);
 

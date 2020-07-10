@@ -13,7 +13,7 @@ class ProjectService {
     /**
      * 查对对应的项目配置
      */
-    def findProjectConfigSelected(projectId) {
+    def  findProjectConfigSelected(projectId) {
         for (int i = 0; i < this.projects.size(); i++) {
             def curProjectConfig = this.projects.get(i);
             if (curProjectConfig.id.equalsIgnoreCase(projectId)) {

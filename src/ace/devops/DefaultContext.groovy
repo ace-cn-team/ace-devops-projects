@@ -1,7 +1,9 @@
-package ace.devops.module.project
+package ace.devops
 
+import ace.devops.module.jenkins.service.JenkinsEnvService
+import ace.devops.module.jenkins.service.JenkinsProjectFacadeService
 import ace.devops.module.project.model.bo.Project
-import ace.devops.module.project.service.JenkinsProjectFacadeService
+
 import ace.devops.module.project.service.ProjectService
 
 /**
@@ -9,7 +11,7 @@ import ace.devops.module.project.service.ProjectService
  * @create 2020/7/9 16:15
  * @description
  */
-class ProjectDefaultContext {
+class DefaultContext {
 
     List<Project> projects = Arrays.asList(
             new Project(
@@ -28,8 +30,11 @@ class ProjectDefaultContext {
 
     JenkinsProjectFacadeService jenkinsProjectFacadeService;
 
-    ProjectDefaultContext() {
+    JenkinsEnvService jenkinsEnvService;
+
+    DefaultContext() {
         projectService = new ProjectService(projects: projects);
         jenkinsProjectFacadeService = new JenkinsProjectFacadeService(projectService: projectService);
+        jenkinsEnvService = new JenkinsEnvService();
     }
 }
