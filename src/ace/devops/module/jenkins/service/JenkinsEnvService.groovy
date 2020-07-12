@@ -10,16 +10,13 @@ import java.util.stream.Collectors
  * @create 2020/7/10 9:55
  * @description
  */
-class JenkinsEnvService {
-    String getChoices() {
-        return EnvironmentEnum.values()
-                .toList()
-                .stream()
-                .map(p -> p.id)
-                .collect(Collectors.toList())
-                .join(",");
 
-    }
-
-
+def String getChoices() {
+    return EnvironmentEnum.values()
+            .toList()
+            .stream()
+            .map(p -> p.id)
+            .collect(Collectors.toList())
+            .join(",");
 }
+
