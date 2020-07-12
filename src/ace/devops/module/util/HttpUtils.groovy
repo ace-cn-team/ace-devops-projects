@@ -15,13 +15,12 @@ class HttpUtils {
     private static final String REQUEST_METHOD_GET = "GET";
 
     static String get(String url, Map<String, String> params) {
-        String urlParams = params.entrySet()
-                .stream()
-                .map(p -> {
-                    return String.format("%s=%s", p.key, p.value);
-                })
-                .collect(Collectors.toList())
-                .join("&");
+
+        StringBuffer urlParams = new StringBuffer();
+        params.each { k, v ->
+            urlParams.append(String.format("%s=%s", k, v))
+        };
+
         String realUrl = String.format("%s?%s",
                 url,
                 urlParams
