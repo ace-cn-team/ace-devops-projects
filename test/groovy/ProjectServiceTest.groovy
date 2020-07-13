@@ -26,7 +26,6 @@ class ProjectServiceTest {
         def project = projectService.findAll().stream().findFirst().get();
         println("jenkinsProjectFacadeService.getProjectWorkSpace:${jenkinsProjectFacadeService.getProjectWorkSpace(project)}");
         println("jenkinsProjectFacadeService.getProjectPomFileAbsolutePath:${jenkinsProjectFacadeService.getProjectPomFileAbsolutePath("", project)}");
-
         println("jenkinsProjectFacadeService.getProjectPomFileAbsolutePath:${jenkinsEnvService.getChoices()} ");
     }
 
