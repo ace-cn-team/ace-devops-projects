@@ -14,15 +14,13 @@ while getopts a:b: OPT; do
   esac
 done
 
-if [ $baseVersion ]; then
-  baseVersion="baseVersion=${baseVersion}"
-fi
 ########################################################################################################################
 ## 函数定义
 ########################################################################################################################
 function getArtifactDownloadUrl() {
     artifactId=$1
-    nexus3SearchApiUrl="http://nexus3.ace.com:8081/service/rest/v1/search/assets?sort=version&direction=desc&repository=maven-releases&maven.artifactId=${artifactId}"
+    nexus3SearchApiUrl="http://nexus3.ace.com:8081/service/rest/v1/search/assets?sort=version&direction=desc&repository=maven-releases&maven.artifactId=${artifactId}&maven.baseVersion=${baseVersion}"
+
     jsonResult=$(curl "${nexus3SearchApiUrl}")
     jsonArrayLength=$(echo ${jsonResult}|jq '.items|length')
     jsonArrayLength=$((10#${jsonArrayLength}-1))
@@ -44,6 +42,8 @@ function getArtifactDownloadUrl() {
 ########################################################################################################################
 ## 构建镜像，并上传镜像脚本开始
 ########################################################################################################################
+echo "artifactId:${artifactId}"
+echo "baseVersion:${baseVersion}"
 # 微服务jar包下载地址
 artifactDownloadUrl=$(getArtifactDownloadUrl "${artifactId}")
 echo "${artifactDownloadUrl}"
@@ -61,10 +61,13 @@ imageTimeTag=$(date "+%y%m%d%H%M%S")
 imageName="${dockerHubUrl}/${artifactId}"
 imageNameWithTimeTag="${dockerHubUrl}/${artifactId}:${imageTimeTag}"
 imageNameWithLatestTag="${dockerHubUrl}/${artifactId}:latest"
+
 echo "开始删除之前本地docker所有相关镜像"
 docker -H ${dockerAgentServerAddr} rmi --force $(docker -H ${dockerAgentServerAddr} images -a |grep ${artifactId}|awk '{print $3}')||true
 # 下载微服务jar包
-#eval "wget --content-disposition -O ${jarPath} -P target "${artifactDownloadUrl}""
+echo "下载微服务jar包"
+mkdir -p target
+eval "wget --content-disposition -O ${jarPath} -P target "${artifactDownloadUrl}""
 # 构建镜像
 echo "开始构建镜像 ${imageNameWithTimeTag} ${imageNameWithLatestTag}"
 docker -H "${dockerAgentServerAddr}" build \
@@ -73,8 +76,8 @@ docker -H "${dockerAgentServerAddr}" build \
 --build-arg JAR_PATH="${jarName}" \
 "./target"
 docker -H "${dockerAgentServerAddr}" tag ${imageNameWithTimeTag} ${imageNameWithLatestTag}
-#docker login -u admin -p admin123 ${docker_hub_url}
+docker -H "${dockerAgentServerAddr}" login -u "${dockerUsername}" -p "${dockerPassword}" ${dockerHubUrl}
 echo "上传镜像"
-docker -H ${dockerAgentServerAddr} push ${imageNameWithTimeTag}
-docker -H ${dockerAgentServerAddr} push ${imageNameWithLatestTag}
+docker -H "${dockerAgentServerAddr}" push ${imageNameWithTimeTag}
+docker -H "${dockerAgentServerAddr}" push ${imageNameWithLatestTag}
 #docker logout  ${docker_hub_url}
