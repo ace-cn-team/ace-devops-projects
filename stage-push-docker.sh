@@ -30,7 +30,7 @@ function getArtifactDownloadUrl() {
     for i in $(seq 0 1 ${jsonArrayLength})
       do
         artifactDownloadUrl=$(echo ${jsonResult}|jq ".items[${i}].downloadUrl")
-        if [[ ${artifactDownloadUrl} == *.jar\" && ${artifactDownloadUrl} != *-sources.jar\" ]]
+        if [[ (${artifactDownloadUrl} == *.jar\" || ${artifactDownloadUrl} == *.war\") && ${artifactDownloadUrl} != *-sources.jar\" ]]
           then
             break
           else
