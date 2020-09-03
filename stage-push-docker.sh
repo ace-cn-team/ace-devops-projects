@@ -70,12 +70,14 @@ mkdir -p target
 eval "wget --content-disposition -O ${jarPath} -P target "${artifactDownloadUrl}""
 # 构建镜像
 echo "开始构建镜像 ${imageNameWithTimeTag} ${imageNameWithLatestTag}"
+mv dockerfile ./target
 docker -H "${dockerAgentServerAddr}" build \
--f dockerfile \
+-f ./target/dockerfile \
 -t "${imageNameWithTimeTag}" \
 --build-arg JAR_PATH="${jarName}" \
 "./target"
 docker -H "${dockerAgentServerAddr}" tag ${imageNameWithTimeTag} ${imageNameWithLatestTag}
+echo "docker -H \"${dockerAgentServerAddr}\" login -u \"${dockerUsername}\" -p \"${dockerPassword}\" ${dockerHubUrl}"
 docker -H "${dockerAgentServerAddr}" login -u "${dockerUsername}" -p "${dockerPassword}" ${dockerHubUrl}
 echo "上传镜像"
 docker -H "${dockerAgentServerAddr}" push ${imageNameWithTimeTag}
