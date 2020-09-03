@@ -77,7 +77,6 @@ docker -H "${dockerAgentServerAddr}" build \
 --build-arg JAR_PATH="${jarName}" \
 "./target"
 docker -H "${dockerAgentServerAddr}" tag ${imageNameWithTimeTag} ${imageNameWithLatestTag}
-echo "docker -H \"${dockerAgentServerAddr}\" login -u \"${dockerUsername}\" -p \"${dockerPassword}\" ${dockerHubUrl}"
 docker -H "${dockerAgentServerAddr}" login -u "${dockerUsername}" -p "${dockerPassword}" ${dockerHubUrl}
 echo "上传镜像"
 docker -H "${dockerAgentServerAddr}" push ${imageNameWithTimeTag}
